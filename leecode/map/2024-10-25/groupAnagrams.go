@@ -1,5 +1,9 @@
 package main
 
+import (
+	"sort"
+)
+
 /*
 *
 
@@ -32,6 +36,24 @@ strs[i] 仅包含小写字母
 */
 func main() {
 
+}
+
+func groupAnagramsV2(strs []string) [][]string {
+	resMap := map[string][]string{}
+	for _, str := range strs {
+		strS := []byte(str)
+		sort.Slice(strS, func(i, j int) bool {
+			return str[i] < str[j]
+		})
+		resMap[string(strS)] = append(resMap[string(strS)], str)
+	}
+	var res = make([][]string, 0, len(resMap))
+
+	for _, strings := range resMap {
+		res = append(res, strings)
+	}
+
+	return res
 }
 
 func groupAnagrams(strs []string) [][]string {
